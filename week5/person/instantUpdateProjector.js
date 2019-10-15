@@ -69,8 +69,10 @@ const columnItemProjector = (masterController, rootElement, model, attributeName
     //TODO: Add a field for remove-button, place it before or after the attributes?
     attributeNames.forEach( attributeName => {
         //create a field with an input element for each attribute
-        const tdItem = document.createElement("TD").appendChild(textInputProjector(model[attributeName]));
+        const tdItem = document.createElement("TD");
+        tdItem.appendChild(textInputProjector(model[attributeName]));
         trElement.appendChild(tdItem);
+        console.log("td added");
     });
     rootElement.appendChild(trElement);
 }
@@ -83,7 +85,7 @@ const tableProjector = (attributeNames) => {
     tableElement.appendChild(headerTrElement);
     attributeNames.forEach( attributeName => {
         const thElement = document.createElement("TH");
-        thElement.setAttribute("VALUE",attributeName);
+        thElement.innerHTML = attributeName;
         headerTrElement.appendChild(thElement);
     });
     tableElement.appendChild(headerTrElement);
