@@ -1,5 +1,5 @@
 import { Attribute, LABEL }                                 from "../presentationModel/presentationModel.js";
-import { listItemProjector, formProjector }                 from "./instantUpdateProjector.js";
+import { listItemProjector, formProjector, tableProjector, columnItemProjector }                 from "./instantUpdateProjector.js";
 
 export { MasterView, DetailView, Person, NoPerson, ALL_ATTRIBUTE_NAMES }
 
@@ -24,10 +24,13 @@ const Person = () => {                               // facade
 // View-specific parts
 
 const MasterView = (listController, selectionController, rootElement) => {
-
+    //create the table only once
+    const tableElement =  tableProjector(ALL_ATTRIBUTE_NAMES);
+    //render should update only this one column of the table
     const render = person =>
-        listItemProjector(listController, selectionController, rootElement, person, ALL_ATTRIBUTE_NAMES);
+        columnItemProjector(listController, tableElement, person, ALL_ATTRIBUTE_NAMES);
 
+    rootElement.appendChild(tableElement);
     // binding
     listController.onModelAdd(render);
 };

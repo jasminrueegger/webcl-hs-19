@@ -1,6 +1,6 @@
 import {EDITABLE, LABEL, VALID, VALUE} from "../presentationModel/presentationModel.js";
 
-export { listItemProjector, formProjector }
+export { listItemProjector, formProjector, tableProjector, columnItemProjector }
 
 const bindTextInput = (textAttr, inputElement) => {
     inputElement.oninput = _ => textAttr.setConvertedValue(inputElement.value);
@@ -22,13 +22,10 @@ const bindTextInput = (textAttr, inputElement) => {
 };
 
 const textInputProjector = textAttr => {
-
     const inputElement = document.createElement("INPUT");
     inputElement.type = "text";
     inputElement.size = 20;
-
     bindTextInput(textAttr, inputElement);
-
     return inputElement;
 };
 
@@ -65,6 +62,33 @@ const listItemProjector = (masterController, selectionController, rootElement, m
     inputElements.forEach( inputElement => rootElement.appendChild(inputElement));
     selectionController.setSelectedModel(model);
 };
+
+//creates a column with a button and the attributes for this model
+const columnItemProjector = (masterController, rootElement, model, attributeNames) => {
+    const trElement = document.createElement("TR");
+    //TODO: Add a field for remove-button, place it before or after the attributes?
+    attributeNames.forEach( attributeName => {
+        //create a field with an input element for each attribute
+        const tdItem = document.createElement("TD").appendChild(textInputProjector(model[attributeName]));
+        trElement.appendChild(tdItem);
+    });
+    rootElement.appendChild(trElement);
+}
+
+//creates the table with header row and returns it
+const tableProjector = (attributeNames) => {
+    const tableElement = document.createElement("TABLE");
+    tableElement.setAttribute("style", "width:100%");
+    const headerTrElement = document.createElement("TR");
+    tableElement.appendChild(headerTrElement);
+    attributeNames.forEach( attributeName => {
+        const thElement = document.createElement("TH");
+        thElement.setAttribute("VALUE",attributeName);
+        headerTrElement.appendChild(thElement);
+    });
+    tableElement.appendChild(headerTrElement);
+    return tableElement;
+}
 
 const formProjector = (detailController, rootElement, model, attributeNames) => {
 
