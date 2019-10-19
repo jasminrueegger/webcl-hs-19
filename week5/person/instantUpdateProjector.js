@@ -72,7 +72,6 @@ const tableProjector = (attributeNames, model) => {
     tableElement.appendChild(headerTrElement);
     attributeNames.forEach( attributeName => {
         const thElement = document.createElement("TH");
-        thElement.setAttribute("ID", "TH" + attributeName);
         model[attributeName].getObs(LABEL, '').onChange(label => thElement.innerHTML = label);
         headerTrElement.appendChild(thElement);
     });

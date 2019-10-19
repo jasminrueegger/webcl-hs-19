@@ -17,11 +17,12 @@ th {
     border: 2px;
     padding-left: 0.5em;
 }
-#THfirstname {
-    border-radius: 15px 0 0 0;
-}
-#THlastname {
+
+tr th:last-child{
     border-radius: 0 15px 0 0;
+}
+tr th:first-child{
+    border-radius: 15px 0 0 0;
 }
 table {
     width: 100%;
