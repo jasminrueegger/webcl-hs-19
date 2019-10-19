@@ -66,7 +66,7 @@ const columnItemProjector = (masterController, selectionController, rootElement,
 };
 
 //creates the table with header row and returns it
-const tableProjector = (attributeNames, model) => {
+const old_tableProjector = (attributeNames, model) => {
     const tableElement = document.createElement("TABLE");
     const headerTrElement = document.createElement("TR");
     tableElement.appendChild(headerTrElement);
@@ -75,6 +75,25 @@ const tableProjector = (attributeNames, model) => {
         model[attributeName].getObs(LABEL, '').onChange(label => thElement.innerHTML = label);
         headerTrElement.appendChild(thElement);
     });
+    tableElement.appendChild(headerTrElement);
+    return tableElement;
+};
+
+//creates the table with header row and returns it
+const tableProjector = (attributeNames) => {
+    const tableElement = document.createElement("TABLE");
+    const headerTrElement = document.createElement("TR");
+    tableElement.appendChild(headerTrElement);
+    attributeNames.forEach( attributeName => {
+        const thElement = document.createElement("TH");
+        thElement.innerText = attributeName;
+        headerTrElement.appendChild(thElement);
+    });
+    // add column for delete option
+    const thElement = document.createElement("TH");
+    thElement.setAttribute("ID", "TH_del");
+    headerTrElement.appendChild(thElement);
+
     tableElement.appendChild(headerTrElement);
     return tableElement;
 };
