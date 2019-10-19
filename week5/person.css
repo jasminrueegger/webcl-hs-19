@@ -12,8 +12,8 @@ body {
 
 table {
     width: 100%;
-    overflow: hidden;
     border-collapse: collapse;
+    box-shadow: 13px 13px 15px  darkgray;
 }
 
 th {
@@ -21,7 +21,6 @@ th {
     color: white;
     height: 1.5em;
     text-align: left;
-    border: 2px;
     padding-left: 0.5em;
     white-space: nowrap;
 }
@@ -34,21 +33,14 @@ tr th:last-child {
 }
 
 /*thanks to https://codepen.io/alexerlandsson/pen/mPWgpO*/
-tr:hover {
-    background-color: rgba(0,0,0,0.1);
-}
-td.off {
-    position: relative;
-}
-td.off:hover:before {
-    background-color: rgba(0,0,0,0.1);
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -100em;
-    bottom: -100em;
-    z-index: -10;
+tr:hover { background-color: rgba(0,0,0,0.1);   }
+tr.selected td    { background-color: papayawhip;     }
+tr td { padding-left: 0.5em;}
+tr td:first-child { border-left: 1px solid darkblue;  }
+tr td:last-child  { border-right: 1px solid darkblue; }
+
+table tr:last-child {
+    border-bottom: 1px solid darkblue;
 }
 
 h1 {
@@ -86,11 +78,4 @@ input[type=text]:focus {
 }
 input.invalid {
     color: red;
-}
-.off_selected {
-    box-shadow: 0 0 0.5em gold;
-}
-
-.selected td {
-    background-color: papayawhip;
 }
