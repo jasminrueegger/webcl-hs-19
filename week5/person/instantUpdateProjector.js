@@ -40,14 +40,16 @@ const rowItemProjector = (masterController, selectionController, rootElement, mo
         tdElement.appendChild(inputElement);
         trElement.appendChild(tdElement);
     });
-    const tdItem = document.createElement("TD");
-    tdItem.setAttribute("class","delete");
+
     const deleteButton      = document.createElement("Button");
     deleteButton.setAttribute("class","delete");
     deleteButton.innerHTML  = "&times;";
     deleteButton.onclick    = _ => masterController.removeModel(model);
-    tdItem.appendChild(deleteButton);
-    trElement.appendChild(tdItem);
+
+    const tdElement = document.createElement("TD");
+    tdElement.setAttribute("class","delete");
+    tdElement.appendChild(deleteButton);
+    trElement.appendChild(tdElement);
 
     selectionController.onModelSelected(
         selected => selected === model
