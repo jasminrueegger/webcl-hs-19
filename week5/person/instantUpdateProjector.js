@@ -68,20 +68,16 @@ const rowItemProjector = (masterController, selectionController, rootElement, mo
 };
 
 //creates the table with header row and returns it
-const tableProjector = (attributeNames, model) => {
+const tableProjector = (attributeLabels) => {
     const tableElement = document.createElement("TABLE");
     const headerTrElement = document.createElement("TR");
     tableElement.appendChild(headerTrElement);
-    attributeNames.forEach( attributeName => {
+
+    attributeLabels.forEach(label => {
         const thElement = document.createElement("TH");
-        //thElement.innerText = attributeName[0].toUpperCase() + attributeName.slice(1); ;
-        thElement.innerText = model[attributeName].getObs(LABEL, '').getValue()
+        thElement.innerText =label
         headerTrElement.appendChild(thElement);
     });
-    // add column for delete option
-    const thElement = document.createElement("TH");
-    thElement.setAttribute("ID", "TH_del");
-    headerTrElement.appendChild(thElement);
 
     tableElement.appendChild(headerTrElement);
     return tableElement;
