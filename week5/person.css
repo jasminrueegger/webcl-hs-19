@@ -33,7 +33,6 @@ tr th:last-child {
     width: 30px;
 }
 
-/*thanks to https://codepen.io/alexerlandsson/pen/mPWgpO*/
 tr:hover { background-color: rgba(0,0,0,0.1);   }
 tr.selected td    { background-color: papayawhip;     }
 tr td { padding-left: 0.5em;}

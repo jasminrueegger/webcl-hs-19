@@ -29,7 +29,7 @@ const textInputProjector = textAttr => {
     return inputElement;
 };
 
-//creates a column with a button and the attributes for this model
+//creates a column with a delete-button and the attributes for this model
 const rowItemProjector = (masterController, selectionController, rootElement, model, attributeNames) => {
     const trElement = document.createElement("TR");
     attributeNames.forEach( attributeName => {
@@ -64,23 +64,6 @@ const rowItemProjector = (masterController, selectionController, rootElement, mo
     rootElement.appendChild(trElement);
     selectionController.setSelectedModel(model);
 };
-
-//creates the table with header row and returns it
-const old_tableProjector = (attributeNames, model) => {
-    const tableElement = document.createElement("TABLE");
-    const headerTrElement = document.createElement("TR");
-    tableElement.appendChild(headerTrElement);
-    attributeNames.forEach( attributeName => {
-        const thElement = document.createElement("TH");
-        model[attributeName].getObs(LABEL, '').onChange(label => thElement.innerHTML = label);
-        headerTrElement.appendChild(thElement);
-    });
-    tableElement.appendChild(headerTrElement);
-    return tableElement;
-};
-
-
-
 
 //creates the table with header row and returns it
 const tableProjector = (attributeNames, model) => {
