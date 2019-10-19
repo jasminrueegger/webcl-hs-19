@@ -10,14 +10,24 @@ body {
                 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 th {
-    background-color: lightgray;
+    background-color: darkblue;
+    color: white;
     height: 1.5em;
     text-align: left;
+    border: 2px;
+    padding-left: 0.5em;
+}
+#THfirstname {
+    border-radius: 15px 0 0 0;
+}
+#THlastname {
+    border-radius: 0 15px 0 0;
 }
 table {
     width: 100%;
     overflow: hidden;
 }
+/*thanks to https://codepen.io/alexerlandsson/pen/mPWgpO*/
 tr:hover {
     background-color: rgba(0,0,0,0.1);
 }
@@ -30,10 +40,11 @@ td:hover:before {
     position: absolute;
     left: 0;
     right: 0;
-    top: -9999px;
-    bottom: -9999px;
+    top: -100em;
+    bottom: -100em;
     z-index: -10;
 }
+
 h1 {
     text-align: center;
 }

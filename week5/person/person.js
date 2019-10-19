@@ -21,11 +21,17 @@ const Person = () => {                               // facade
     }
 };
 
-// View-specific parts
+const NoPerson = (() => { // one time creation, singleton
+    const johnDoe = Person();
+    johnDoe.firstname.setConvertedValue("");
+    johnDoe.lastname.setConvertedValue("");
+    return johnDoe;
+})();
 
+// View-specific parts
 const MasterView = (listController, selectionController, rootElement) => {
     //create the table only once
-    const tableElement =  tableProjector(ALL_ATTRIBUTE_NAMES);
+    const tableElement =  tableProjector(ALL_ATTRIBUTE_NAMES,NoPerson);
     //render should update only this one column of the table
     const render = person =>
         columnItemProjector(listController, selectionController, tableElement, person, ALL_ATTRIBUTE_NAMES);
@@ -34,13 +40,6 @@ const MasterView = (listController, selectionController, rootElement) => {
     // binding
     listController.onModelAdd(render);
 };
-
-const NoPerson = (() => { // one time creation, singleton
-    const johnDoe = Person();
-    johnDoe.firstname.setConvertedValue("");
-    johnDoe.lastname.setConvertedValue("");
-    return johnDoe;
-})();
 
 const DetailView = (selectionController, rootElement) => {
 

@@ -66,13 +66,14 @@ const columnItemProjector = (masterController, selectionController, rootElement,
 };
 
 //creates the table with header row and returns it
-const tableProjector = (attributeNames) => {
+const tableProjector = (attributeNames, model) => {
     const tableElement = document.createElement("TABLE");
     const headerTrElement = document.createElement("TR");
     tableElement.appendChild(headerTrElement);
     attributeNames.forEach( attributeName => {
         const thElement = document.createElement("TH");
-        thElement.innerHTML = attributeName;
+        thElement.setAttribute("ID", "TH" + attributeName);
+        model[attributeName].getObs(LABEL, '').onChange(label => thElement.innerHTML = label);
         headerTrElement.appendChild(thElement);
     });
     tableElement.appendChild(headerTrElement);
