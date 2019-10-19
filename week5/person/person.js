@@ -3,7 +3,7 @@ import { formProjector, tableProjector, rowItemProjector }                 from 
 
 export { MasterView, DetailView, Person, NoPerson, ALL_ATTRIBUTE_NAMES }
 
-const ALL_ATTRIBUTE_NAMES = ['firstname', 'lastname'];
+const ALL_ATTRIBUTE_NAMES = ['firstname', 'lastname', 'wohnort'];
 
 const Person = () => {                               // facade
     const firstnameAttr = Attribute("Monika");
@@ -12,12 +12,16 @@ const Person = () => {                               // facade
     const lastnameAttr  = Attribute("Mustermann");
     lastnameAttr.getObs(LABEL).setValue("Last Name");
 
+    const wohnortAttr  = Attribute("Brugg");
+    wohnortAttr.getObs(LABEL).setValue("Wohnort");
+
     // lastnameAttr.setConverter( input => input.toUpperCase() );
     // lastnameAttr.setValidator( input => input.length >= 3   );
 
     return {
         firstname:          firstnameAttr,
         lastname:           lastnameAttr,
+        wohnort:            wohnortAttr,
     }
 };
 

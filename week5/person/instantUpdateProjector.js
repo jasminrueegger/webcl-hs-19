@@ -33,12 +33,12 @@ const textInputProjector = textAttr => {
 const rowItemProjector = (masterController, selectionController, rootElement, model, attributeNames) => {
     const trElement = document.createElement("TR");
     attributeNames.forEach( attributeName => {
-        const tdItem = document.createElement("TD");
-        tdItem.setAttribute("class","input")
+        const tdElement = document.createElement("TD");
+        tdElement.setAttribute("class","input")
         const inputElement = textInputProjector(model[attributeName]);
         inputElement.onfocus = _ => selectionController.setSelectedModel(model);
-        tdItem.appendChild(inputElement);
-        trElement.appendChild(tdItem);
+        tdElement.appendChild(inputElement);
+        trElement.appendChild(tdElement);
     });
     const tdItem = document.createElement("TD");
     tdItem.setAttribute("class","delete");
