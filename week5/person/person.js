@@ -28,7 +28,7 @@ const MasterView = (listController, selectionController, rootElement) => {
     const tableElement =  tableProjector(ALL_ATTRIBUTE_NAMES);
     //render should update only this one column of the table
     const render = person =>
-        columnItemProjector(listController, tableElement, person, ALL_ATTRIBUTE_NAMES);
+        columnItemProjector(listController, selectionController, tableElement, person, ALL_ATTRIBUTE_NAMES);
 
     rootElement.appendChild(tableElement);
     // binding

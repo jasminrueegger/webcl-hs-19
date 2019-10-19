@@ -29,52 +29,36 @@ const textInputProjector = textAttr => {
     return inputElement;
 };
 
-const listItemProjector = (masterController, selectionController, rootElement, model, attributeNames) => {
-
+//creates a column with a button and the attributes for this model
+const columnItemProjector = (masterController, selectionController, rootElement, model, attributeNames) => {
+    const trElement = document.createElement("TR");
+    attributeNames.forEach( attributeName => {
+        const tdItem = document.createElement("TD");
+        const inputElement = textInputProjector(model[attributeName]);
+        inputElement.onfocus = _ => selectionController.setSelectedModel(model);
+        tdItem.appendChild(inputElement);
+        trElement.appendChild(tdItem);
+    });
     const deleteButton      = document.createElement("Button");
     deleteButton.setAttribute("class","delete");
     deleteButton.innerHTML  = "&times;";
     deleteButton.onclick    = _ => masterController.removeModel(model);
-
-    const inputElements = [];
-
-    attributeNames.forEach( attributeName => {
-        const inputElement = textInputProjector(model[attributeName]);
-        inputElement.onfocus = _ => selectionController.setSelectedModel(model);
-        inputElements.push(inputElement);
-    });
+    trElement.appendChild(deleteButton);
 
     selectionController.onModelSelected(
         selected => selected === model
-          ? deleteButton.classList.add("selected")
-          : deleteButton.classList.remove("selected")
+            ? deleteButton.classList.add("selected")
+            : deleteButton.classList.remove("selected")
     );
 
     masterController.onModelRemove( (removedModel, removeMe) => {
         if (removedModel !== model) return;
-        rootElement.removeChild(deleteButton);
-        inputElements.forEach( inputElement => rootElement.removeChild(inputElement));
+        rootElement.removeChild(trElement);
         selectionController.clearSelection();
         removeMe();
     } );
-
-    rootElement.appendChild(deleteButton);
-    inputElements.forEach( inputElement => rootElement.appendChild(inputElement));
-    selectionController.setSelectedModel(model);
-};
-
-//creates a column with a button and the attributes for this model
-const columnItemProjector = (masterController, rootElement, model, attributeNames) => {
-    const trElement = document.createElement("TR");
-    //TODO: Add a field for remove-button, place it before or after the attributes?
-    attributeNames.forEach( attributeName => {
-        //create a field with an input element for each attribute
-        const tdItem = document.createElement("TD");
-        tdItem.appendChild(textInputProjector(model[attributeName]));
-        trElement.appendChild(tdItem);
-        console.log("td added");
-    });
     rootElement.appendChild(trElement);
+    selectionController.setSelectedModel(model);
 }
 
 //creates the table with header row and returns it
