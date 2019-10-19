@@ -9,6 +9,13 @@ body {
     box-shadow: 0 4px  8px 0 rgba(0, 0, 0, 0.2),
                 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+table {
+    width: 100%;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
 th {
     background-color: darkblue;
     color: white;
@@ -16,27 +23,24 @@ th {
     text-align: left;
     border: 2px;
     padding-left: 0.5em;
-}
-
-tr th:last-child{
-    border-radius: 0 15px 0 0;
-    width: 30px;
+    white-space: nowrap;
 }
 tr th:first-child{
     border-radius: 15px 0 0 0;
 }
-table {
-    width: 100%;
-    overflow: hidden;
+tr th:last-child {
+    border-radius: 0 15px 0 0;
+    width: 30px;
 }
+
 /*thanks to https://codepen.io/alexerlandsson/pen/mPWgpO*/
 tr:hover {
     background-color: rgba(0,0,0,0.1);
 }
-td {
+td.off {
     position: relative;
 }
-td:hover:before {
+td.off:hover:before {
     background-color: rgba(0,0,0,0.1);
     content: "";
     position: absolute;
@@ -83,6 +87,10 @@ input[type=text]:focus {
 input.invalid {
     color: red;
 }
-.selected {
+.off_selected {
     box-shadow: 0 0 0.5em gold;
+}
+
+.selected td {
+    background-color: papayawhip;
 }

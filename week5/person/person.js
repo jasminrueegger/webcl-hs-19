@@ -1,5 +1,5 @@
 import { Attribute, LABEL }                                 from "../presentationModel/presentationModel.js";
-import { formProjector, tableProjector, columnItemProjector }                 from "./instantUpdateProjector.js";
+import { formProjector, tableProjector, rowItemProjector }                 from "./instantUpdateProjector.js";
 
 export { MasterView, DetailView, Person, NoPerson, ALL_ATTRIBUTE_NAMES }
 
@@ -34,7 +34,7 @@ const MasterView = (listController, selectionController, rootElement) => {
     const tableElement =  tableProjector(ALL_ATTRIBUTE_NAMES,NoPerson);
     //render should update only this one column of the table
     const render = person =>
-        columnItemProjector(listController, selectionController, tableElement, person, ALL_ATTRIBUTE_NAMES);
+        rowItemProjector(listController, selectionController, tableElement, person, ALL_ATTRIBUTE_NAMES);
 
     rootElement.appendChild(tableElement);
     // binding

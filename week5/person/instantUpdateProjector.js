@@ -1,6 +1,6 @@
 import {EDITABLE, LABEL, VALID, VALUE} from "../presentationModel/presentationModel.js";
 
-export { formProjector, tableProjector, columnItemProjector }
+export { formProjector, tableProjector, rowItemProjector }
 
 const bindTextInput = (textAttr, inputElement) => {
     inputElement.oninput = _ => textAttr.setConvertedValue(inputElement.value);
@@ -30,7 +30,7 @@ const textInputProjector = textAttr => {
 };
 
 //creates a column with a button and the attributes for this model
-const columnItemProjector = (masterController, selectionController, rootElement, model, attributeNames) => {
+const rowItemProjector = (masterController, selectionController, rootElement, model, attributeNames) => {
     const trElement = document.createElement("TR");
     attributeNames.forEach( attributeName => {
         const tdItem = document.createElement("TD");
@@ -79,14 +79,18 @@ const old_tableProjector = (attributeNames, model) => {
     return tableElement;
 };
 
+
+
+
 //creates the table with header row and returns it
-const tableProjector = (attributeNames) => {
+const tableProjector = (attributeNames, model) => {
     const tableElement = document.createElement("TABLE");
     const headerTrElement = document.createElement("TR");
     tableElement.appendChild(headerTrElement);
     attributeNames.forEach( attributeName => {
         const thElement = document.createElement("TH");
-        thElement.innerText = attributeName;
+        //thElement.innerText = attributeName[0].toUpperCase() + attributeName.slice(1); ;
+        thElement.innerText = model[attributeName].getObs(LABEL, '').getValue()
         headerTrElement.appendChild(thElement);
     });
     // add column for delete option
