@@ -37,11 +37,6 @@ input[type=text]:focus {
     border-color:   orange;
     outline:        transparent none 0;
 }
-#masterContainer {
-    display:        grid;
-    grid-column-gap: 0.5em;
-    margin-bottom:  0.5em;
-}
 .detail-form {
     display:        grid;
     grid-column-gap: 0.5em;
