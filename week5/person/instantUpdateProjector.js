@@ -1,6 +1,6 @@
 import {EDITABLE, LABEL, VALID, VALUE} from "../presentationModel/presentationModel.js";
 
-export { listItemProjector, formProjector, tableProjector, columnItemProjector }
+export { formProjector, tableProjector, columnItemProjector }
 
 const bindTextInput = (textAttr, inputElement) => {
     inputElement.oninput = _ => textAttr.setConvertedValue(inputElement.value);
@@ -34,21 +34,25 @@ const columnItemProjector = (masterController, selectionController, rootElement,
     const trElement = document.createElement("TR");
     attributeNames.forEach( attributeName => {
         const tdItem = document.createElement("TD");
+        tdItem.setAttribute("class","input")
         const inputElement = textInputProjector(model[attributeName]);
         inputElement.onfocus = _ => selectionController.setSelectedModel(model);
         tdItem.appendChild(inputElement);
         trElement.appendChild(tdItem);
     });
+    const tdItem = document.createElement("TD");
+    tdItem.setAttribute("class","delete");
     const deleteButton      = document.createElement("Button");
     deleteButton.setAttribute("class","delete");
     deleteButton.innerHTML  = "&times;";
     deleteButton.onclick    = _ => masterController.removeModel(model);
-    trElement.appendChild(deleteButton);
+    tdItem.appendChild(deleteButton);
+    trElement.appendChild(tdItem);
 
     selectionController.onModelSelected(
         selected => selected === model
-            ? deleteButton.classList.add("selected")
-            : deleteButton.classList.remove("selected")
+            ? trElement.classList.add("selected")
+            : trElement.classList.remove("selected")
     );
 
     masterController.onModelRemove( (removedModel, removeMe) => {
@@ -59,12 +63,11 @@ const columnItemProjector = (masterController, selectionController, rootElement,
     } );
     rootElement.appendChild(trElement);
     selectionController.setSelectedModel(model);
-}
+};
 
 //creates the table with header row and returns it
 const tableProjector = (attributeNames) => {
     const tableElement = document.createElement("TABLE");
-    tableElement.setAttribute("style", "width:100%");
     const headerTrElement = document.createElement("TR");
     tableElement.appendChild(headerTrElement);
     attributeNames.forEach( attributeName => {
@@ -74,7 +77,7 @@ const tableProjector = (attributeNames) => {
     });
     tableElement.appendChild(headerTrElement);
     return tableElement;
-}
+};
 
 const formProjector = (detailController, rootElement, model, attributeNames) => {
 

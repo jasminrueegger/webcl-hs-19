@@ -11,8 +11,17 @@ body {
 }
 th, td {
     border: 1px solid black;
-    min-width:  10em;
 }
+th {
+    min-width: 15em;
+    background-color: lightgray;
+    height: 1.5em;
+}
+table {
+    width: 100%;
+    height: fit-content;
+}
+
 h1 {
     text-align: center;
 }
@@ -31,8 +40,7 @@ input[type=text]:focus {
 #masterContainer {
     display:        grid;
     grid-column-gap: 0.5em;
-    grid-template-columns: 1.7em auto auto;
-    margin-bottom:  0.5em ;
+    margin-bottom:  0.5em;
 }
 .detail-form {
     display:        grid;
@@ -54,5 +62,5 @@ input.invalid {
     color: red;
 }
 .selected {
-    box-shadow: 0 0 0.2em gold;
+    box-shadow: 0 0 0.5em gold;
 }
