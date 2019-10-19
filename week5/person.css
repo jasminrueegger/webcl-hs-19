@@ -9,16 +9,30 @@ body {
     box-shadow: 0 4px  8px 0 rgba(0, 0, 0, 0.2),
                 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-th, td {
-    border: 1px solid black;
-}
 th {
     background-color: lightgray;
     height: 1.5em;
+    text-align: left;
 }
 table {
     width: 100%;
-    height: fit-content;
+    overflow: hidden;
+}
+tr:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+td {
+    position: relative;
+}
+td:hover:before {
+    background-color: rgba(0,0,0,0.1);
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -9999px;
+    bottom: -9999px;
+    z-index: -10;
 }
 h1 {
     text-align: center;
@@ -30,6 +44,8 @@ input[type=text] {
     font-size:      1.1em;
     color:          darkblue;
     border-width:   0 0 1px 0;
+    width:          95%;
+    background-color: transparent;
 }
 input[type=text]:focus {
     border-color:   orange;
